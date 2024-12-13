@@ -139,27 +139,29 @@ function Table({
   ]);
 
   React.useEffect(() => {
+    setExpandAllChecked(true); 
+    toggleAllRowsExpanded(true);
     setHiddenColumns(
       columns.filter((column) => column.hide).map((column) => column.id)
     );
   }, [columns, setHiddenColumns]);
 
   // Render the UI for your table
+  // Originally an "Expand All" button, changed to "Collapse All"
   return (
     <>
-      <div className="allExpandToggle">
+      <div className="allExpandToggle" >
         <label>
           <input
             type="checkbox"
             onChange={(e) => {
-              setExpandAllChecked(e.target.checked);
-              toggleAllRowsExpanded(e.target.checked);
+              setExpandAllChecked(!e.target.checked);
+              toggleAllRowsExpanded(!e.target.checked);
             }}
           />
-          {" Expand All"}
+          {" Collapse All"}
         </label>
       </div>
-
       <div className="columnToggle">
         {allColumns.map((column) =>
           column.label !== undefined ? (

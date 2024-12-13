@@ -116,7 +116,8 @@ function LogSubTable({ originalRow }) {
         id: "user",
         accessor: (row) => row.audit_user[0]?.first ?? "N/A",
       },
-      ...Object.keys(originalRow.original.row_data).map((key) => ({
+      ...Object.keys(originalRow.original.row_data).filter((key) => 
+        !["id", "password", "username", "email", "actor"].includes(key)).map((key) => ({
         Header: key,
         key: key,
         id: "rd_" + key,
